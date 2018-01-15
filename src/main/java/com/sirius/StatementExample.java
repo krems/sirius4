@@ -41,11 +41,7 @@ public class StatementExample {
     
     private static void insertExample(final Connection conn, final Statement stmt) throws SQLException {
         String insert = "insert into peps values(1, 25, 'Valerii', 'Ovchinnikov')";
-        try {
-            stmt.execute(insert);
-        } catch (SQLException e) {
-            conn.rollback();
-        }
+        stmt.execute(insert);
     }
     
     private static void selectExample(final Statement stmt) throws SQLException {
