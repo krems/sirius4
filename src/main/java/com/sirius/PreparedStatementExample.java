@@ -16,7 +16,7 @@ public class PreparedStatementExample {
         registerDriver();
         try (final Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              final Statement stmt = conn.createStatement()) {
-            createTableExample(stmt);
+            //            createTableExample(stmt);
             preparedStatementExample(conn);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -53,10 +53,10 @@ public class PreparedStatementExample {
         final String insert = "insert into peps values(?, ?, ?, ?)";
         try (PreparedStatement st = conn.prepareStatement(insert)) {
             for (int i = 0; i < 5; i++) {
-                st.setInt(1, i + 1);
+                st.setInt(1, i + 3);
                 st.setInt(2, 31 ^ i);
-                st.setString(3, "Vasilii");
-                st.setString(4, "Pupkin");
+                st.setString(3, "Vasilii" + i);
+                st.setString(4, "Pupkin" + (1 << i));
                 st.executeUpdate();
             }
         } catch (SQLException e) {

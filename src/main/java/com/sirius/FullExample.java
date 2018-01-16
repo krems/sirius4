@@ -16,6 +16,8 @@ public class FullExample {
         registerDriver();
         try (final Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
              final Statement stmt = conn.createStatement()) {
+            // ALWAYS DO IT!
+            conn.setAutoCommit(false);
             createTableExample(stmt);
             insertExample(conn, stmt);
             preparedStatementExample(conn);
@@ -61,9 +63,6 @@ public class FullExample {
                 }
             }
         }
-        
-        // ALWAYS DO IT!
-        conn.setAutoCommit(false);
         
         final String insert = "insert into peps values(?, ?, ?, ?)";
         try (PreparedStatement st = conn.prepareStatement(insert)) {
